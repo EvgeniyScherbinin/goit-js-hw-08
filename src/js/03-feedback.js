@@ -7,7 +7,7 @@ const message = document.querySelector('[name="message"]');
 
 const FORM_KEY = "feedback-form-state";
 form.addEventListener("input", throttle(saveInput, 500));
-form.addEventListener("submit", cleanStorege);
+form.addEventListener("submit", checkSubmit);
 const formInput = {};
 
 
@@ -25,6 +25,14 @@ function saveInput() {
     localStorage.setItem(FORM_KEY, JSON.stringify(formInput));
 };
 
+function checkSubmit(e) {
+    e.preventDefault();
+    if(email.value === "" || message.value === "") {
+        console.log("fill all fields")
+        return;
+    };
+    cleanStorege(e);
+};
 
 const formInputSave = JSON.parse(localStorage.getItem(FORM_KEY));
 
